@@ -1,5 +1,13 @@
 import {days, convertTimeStringToNumber} from './appUsage.js'
 
+function activateSlider() {
+    $('.slider-nav>span').click(function() {
+        const id = $(this).attr('id');
+        const nextElement = document.getElementById(id);
+        nextElement.scrollIntoView({block: 'nearest'});
+    });
+}
+
 function displayDailyUsage(n) {
     const container = $('#card-container');
     container.empty();
@@ -24,10 +32,12 @@ $(document).ready(() => {
         // Gestisce evento click su pulsante con id home
         $('#home').click(() => {
             // Carica il contenuto html di pages/welcome.html
-            $('main').load('pages/welcome.html');
+            $('main').load('pages/welcome.html', () => {
+                activateSlider();
+            });
         });
 
-        // Gestisce evento click su pulsante con id home
+        // Gestisce evento click su pulsante con id recap
         $('#recap').click(() => { 
             // Carica il contenuto html di pages/recap.html
             $('main').load('pages/recap.html', () => {
@@ -37,14 +47,16 @@ $(document).ready(() => {
                 });
             });
         });
+
+        // Gestisce evento click su pulsante con id charts
+        $('#charts').click(() => {
+            // Carica il contenuto html di pages/charts.html
+            $('main').load('pages/charts.html');
+        });
     });
 
     $('main').load('pages/welcome.html', () => {
-        $('.slider-nav>span').click(function() {
-            const id = $(this).attr('id');
-            const nextElement = document.getElementById(id);
-            nextElement.scrollIntoView({block: 'nearest'});
-        })
+        activateSlider();
     });
 
     $('footer').load('components/footer.html');
