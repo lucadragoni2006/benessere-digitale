@@ -90,6 +90,56 @@
     z-index: 1;
 }
 
+/* Card */
+#select-title {
+    font-size: 2rem;
+    color: #001730;
+}
+
+#day-select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 25vw;
+    border: 2px solid #001730;
+    border-radius: 5px;
+}
+
+#card-container {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    place-items: center;
+    row-gap: 4rem;
+}
+
+.card {
+    background: linear-gradient(132deg, rgb(65, 80, 95) 0.00%, rgb(36, 37, 38) 100.00%);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,1);
+    transition: 0.3s;
+    width: 70%;
+    border-radius: 5px;
+    padding: 1.5rem;
+}
+  
+.card:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,1);
+}
+  
+.card img {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+  
+.card-info {
+    margin-top: 2rem;
+    color: white;
+}
+
+.card-info h3{
+    font-size: 1.75rem;
+}
+
 @media only screen and (max-width: 600px) {
     
     #welcome-heading h1 {
