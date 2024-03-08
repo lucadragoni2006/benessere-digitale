@@ -143,15 +143,19 @@ $(document).ready(() => {
                 });
 
                 $('#show').click(() => {
-                    const appNames = [];
-                    const appUsage = [];
+                    const nameDays = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
+                    const index = $('#day-select').val()
+                    const barChart = $('#bar-chart-' + index);
+                    const pieChart = $('#pie-chart-' + index);
+                    const apps = [];
+                    const usage = [];
                     $('.app-name').each(function() {
-                        appNames.push($(this).val());
+                        apps.push($(this).val());
                     });
                     $('.app-usage').each(function() {
-                        appUsage.push($(this).val());
+                        usage.push($(this).val());
                     });
-                    const day = $('#day-select').val();
+                    generateChart(apps, usage, barChart, pieChart, nameDays[index]);
                 });
             });
         });
