@@ -1,4 +1,4 @@
-import {days, convertTimeStringToNumber} from './data.js'
+import {days, total ,convertTimeStringToNumber} from './data.js'
 
 function generateChart(apps, usage, barChart, pieChart, day) {
     new Chart(barChart, {
@@ -7,7 +7,7 @@ function generateChart(apps, usage, barChart, pieChart, day) {
             labels: apps,
             datasets: [{
                 data: usage,
-                backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'gray', 'crimson', 'darkseagreen']
+                backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'orangered', 'crimson', 'darkseagreen']
             }]
         },
         options: {
@@ -35,7 +35,7 @@ function generateChart(apps, usage, barChart, pieChart, day) {
             labels: apps,
             datasets: [{
                 data: usage,
-                backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'gray', 'crimson', 'darkseagreen']
+                backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'orangered', 'crimson', 'darkseagreen']
             }]
         },
         options: {
@@ -103,8 +103,8 @@ $(document).ready(() => {
         $('#charts').click(() => {
             // Carica il contenuto html di pages/charts.html
             $('main').load('pages/charts.html', function() {
+                const nameDays = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
                 days.forEach((day, index) => {
-                    const nameDays = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
                     const barChart = $('#bar-chart-' + index);
                     const pieChart = $('#pie-chart-' + index);
                     const apps = [];
@@ -115,6 +115,13 @@ $(document).ready(() => {
                     });
                     generateChart(apps, usage, barChart, pieChart, nameDays[index]);
                 });
+                const barTotal = $('#bar-total');
+                const pieTotal = $('#pie-total');
+                const everyDayUsage = [];
+                total.forEach((day, index) => {
+                    everyDayUsage[index] = convertTimeStringToNumber(day).toFixed(1);
+                })
+                generateChart(nameDays, everyDayUsage, barTotal, pieTotal, 'Utilizzo Complessivo');
                 activateSlider();
             });
         });
