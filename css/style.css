@@ -45,7 +45,8 @@
 	border-radius: 0.5rem;
 }
 
-.slider img {
+.slider img,
+.slider canvas {
 	flex: 1 0 100%;
 	scroll-snap-align: start;
 	object-fit: cover;
@@ -141,6 +142,22 @@
     font-size: 1.25rem;
 }
 
+/* Chart Slider */
+.no-ratio {
+    aspect-ratio: unset;
+    margin-bottom: 3rem;
+}
+
+.charts-wrapper {
+    max-width: 50rem;
+}
+
+.charts-wrapper span {
+	background-color: #5b5b5b;
+	opacity: 0.75;
+	transition: opacity ease 250ms;
+}
+
 @media only screen and (max-width: 650px) {
     
     #welcome-heading h1 {
@@ -170,5 +187,10 @@
 
     .card-info h3 {
         font-size: 1.5rem;
+    }
+
+    /* Chart card */
+    .no-ratio {
+        aspect-ratio: unset;
     }
 }

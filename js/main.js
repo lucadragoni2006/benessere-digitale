@@ -1,5 +1,72 @@
 import {days, convertTimeStringToNumber} from './appUsage.js'
 
+function createCharts() {
+    days.forEach((day, index) => {
+        const nameDays = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica']
+        const barChart = $('#bar-chart-' + index);
+        const pieChart = $('#pie-chart-' + index);
+        const apps = [];
+        const usage = [];
+        day.forEach((app, index) => {
+            apps[index] = app.name;
+            usage[index] = convertTimeStringToNumber(app.usage).toFixed(1);
+        });
+
+        new Chart(barChart, {
+            type: 'bar',
+            data: {
+                labels: apps,
+                datasets: [{
+                    data: usage,
+                    backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'gray', 'crimson', 'darkseagreen']
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: nameDays[index],
+                        font: {size: 20}
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+            }
+        });
+
+        new Chart(pieChart, {
+            type: 'pie',
+            data: {
+                labels: apps,
+                datasets: [{
+                    data: usage,
+                    backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'gray', 'crimson', 'darkseagreen']
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: nameDays[index],
+                        font: {size: 20}
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        })
+    });
+}
+
 function activateSlider() {
     $('.slider-nav>span').click(function() {
         const id = $(this).attr('id');
@@ -32,7 +99,7 @@ $(document).ready(() => {
         // Gestisce evento click su pulsante con id home
         $('#home').click(() => {
             // Carica il contenuto html di pages/welcome.html
-            $('main').load('pages/welcome.html', () => {
+            $('main').load('pages/welcome.html', function() {
                 activateSlider();
             });
         });
@@ -51,11 +118,14 @@ $(document).ready(() => {
         // Gestisce evento click su pulsante con id charts
         $('#charts').click(() => {
             // Carica il contenuto html di pages/charts.html
-            $('main').load('pages/charts.html');
+            $('main').load('pages/charts.html', function() {
+                createCharts();
+                activateSlider();
+            });
         });
     });
 
-    $('main').load('pages/welcome.html', () => {
+    $('main').load('pages/welcome.html', function() {
         activateSlider();
     });
 
