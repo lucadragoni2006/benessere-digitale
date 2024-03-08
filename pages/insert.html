@@ -1,0 +1,35 @@
+<div id="welcome-heading">
+    <h1>Inserisci i tuoi dati</h1>
+    <h2>Questa pagina ti aiuterà ad analizzare l'utilizzo del tuo telefono</h2>
+</div>
+<div id="form-container">
+    <div id="form-card">
+        <h2 id="select-title">Seleziona un Giorno</h2>
+        <select id="day-select" style="background-color: white;">
+            <option value="0" selected>Lunedì</option>
+            <option value="1">Martedì</option>
+            <option value="2">Mercoledì</option>
+            <option value="3">Giovedì</option>
+            <option value="4">Venerdì</option>
+            <option value="5">Sabato</option>
+            <option value="6">Domenica</option>
+        </select>
+        <div>
+            <button class="form-button" id="add">Aggiungi App</button>
+            <button class="form-button" id="delete">Rimuovi App</button>
+        </div>
+        <div id="data-field">
+            <div class="input-wrapper">
+                <h3>Inserisci nome App</h3>
+                <input type="text" class="app-name">
+            </div>
+            <div class="input-wrapper">
+                <h3>Inserisci ore di utilizzo dell'App</h3>
+                <input type="number" class="app-usage">
+            </div>
+        </div>
+        <div>
+            <button class="form-button" id="show">Mostra</button>
+        </div>
+    </div>
+</div>

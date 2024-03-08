@@ -1,4 +1,4 @@
-import {days, convertTimeStringToNumber} from './appUsage.js'
+import {days, convertTimeStringToNumber} from './data.js'
 
 function createCharts() {
     days.forEach((day, index) => {
@@ -56,11 +56,6 @@ function createCharts() {
                         text: nameDays[index],
                         font: {size: 20}
                     }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
                 }
             }
         })
@@ -108,6 +103,7 @@ $(document).ready(() => {
         $('#recap').click(() => { 
             // Carica il contenuto html di pages/recap.html
             $('main').load('pages/recap.html', () => {
+                displayDailyUsage(0);
                 // Esegue una funziona al momento in cui cambio il valore sul tag select
                 $('#day-select').change(function() {
                     displayDailyUsage($(this).val())
@@ -121,6 +117,31 @@ $(document).ready(() => {
             $('main').load('pages/charts.html', function() {
                 createCharts();
                 activateSlider();
+            });
+        });
+
+        // Gestisce evento click su pulsante con id insert
+        $('#insert').click(() => {
+            // Carica il contenuto html di pages/insert.html
+            $('main').load('pages/insert.html', () => {
+                $('#add').click(() => {
+                    const wrapper1 = $('<div>').addClass('input-wrapper');
+                    const wrapper2 = $('<div>').addClass('input-wrapper');
+                    const appNameHeading = $('<h3>').text('Inserisci nome App');
+                    const appUsageHeading = $('<h3>').text('Inserisci ore di utilizzo dell\'App');
+                    const appName = $('<input>').attr('type', 'text').addClass('app-name');
+                    const appUsage = $('<input>').attr('type', 'number').addClass('app-usage');
+                    wrapper1.append(appNameHeading, appName);
+                    wrapper2.append(appUsageHeading, appUsage);
+                    $('#data-field').append(wrapper1, wrapper2);
+                });
+                
+                $('#delete').click(() => {
+                    const elements = $('#data-field').children();
+                    if(elements.length > 2) {
+                        elements.slice(-2).remove();
+                    }
+                });
             });
         });
     });
