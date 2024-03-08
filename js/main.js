@@ -1,65 +1,53 @@
 import {days, convertTimeStringToNumber} from './data.js'
 
-function createCharts() {
-    days.forEach((day, index) => {
-        const nameDays = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica']
-        const barChart = $('#bar-chart-' + index);
-        const pieChart = $('#pie-chart-' + index);
-        const apps = [];
-        const usage = [];
-        day.forEach((app, index) => {
-            apps[index] = app.name;
-            usage[index] = convertTimeStringToNumber(app.usage).toFixed(1);
-        });
-
-        new Chart(barChart, {
-            type: 'bar',
-            data: {
-                labels: apps,
-                datasets: [{
-                    data: usage,
-                    backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'gray', 'crimson', 'darkseagreen']
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: nameDays[index],
-                        font: {size: 20}
-                    }
+function generateChart(apps, usage, barChart, pieChart, day) {
+    new Chart(barChart, {
+        type: 'bar',
+        data: {
+            labels: apps,
+            datasets: [{
+                data: usage,
+                backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'gray', 'crimson', 'darkseagreen']
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-            }
-        });
-
-        new Chart(pieChart, {
-            type: 'pie',
-            data: {
-                labels: apps,
-                datasets: [{
-                    data: usage,
-                    backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'gray', 'crimson', 'darkseagreen']
-                }]
+                title: {
+                    display: true,
+                    text: day,
+                    font: {size: 20}
+                }
             },
-            options: {
-                plugins: {
-                    title: {
-                        display: true,
-                        text: nameDays[index],
-                        font: {size: 20}
-                    }
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+        }
+    });
+
+    new Chart(pieChart, {
+        type: 'pie',
+        data: {
+            labels: apps,
+            datasets: [{
+                data: usage,
+                backgroundColor: ['blue', 'red', 'green', 'purple', 'yellow', 'lightblue', 'gray', 'crimson', 'darkseagreen']
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: day,
+                    font: {size: 20}
                 }
             }
-        })
-    });
+        }
+    })
 }
 
 function activateSlider() {
@@ -115,7 +103,18 @@ $(document).ready(() => {
         $('#charts').click(() => {
             // Carica il contenuto html di pages/charts.html
             $('main').load('pages/charts.html', function() {
-                createCharts();
+                days.forEach((day, index) => {
+                    const nameDays = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
+                    const barChart = $('#bar-chart-' + index);
+                    const pieChart = $('#pie-chart-' + index);
+                    const apps = [];
+                    const usage = [];
+                    day.forEach((app, index) => {
+                        apps[index] = app.name;
+                        usage[index] = convertTimeStringToNumber(app.usage).toFixed(1);
+                    });
+                    generateChart(apps, usage, barChart, pieChart, nameDays[index]);
+                });
                 activateSlider();
             });
         });
@@ -141,6 +140,18 @@ $(document).ready(() => {
                     if(elements.length > 2) {
                         elements.slice(-2).remove();
                     }
+                });
+
+                $('#show').click(() => {
+                    const appNames = [];
+                    const appUsage = [];
+                    $('.app-name').each(function() {
+                        appNames.push($(this).val());
+                    });
+                    $('.app-usage').each(function() {
+                        appUsage.push($(this).val());
+                    });
+                    const day = $('#day-select').val();
                 });
             });
         });
