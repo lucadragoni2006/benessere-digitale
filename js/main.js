@@ -155,7 +155,24 @@ $(document).ready(() => {
                     $('.app-usage').each(function() {
                         usage.push($(this).val());
                     });
+                    // Controlla se esiste già un grafico e lo elimina nel caso esista.
+                    if(Chart.getChart(barChart)) {
+                        Chart.getChart(barChart).destroy();
+                        Chart.getChart(pieChart).destroy();
+                    }
+                    console.log(nameDays[index]);
+                    $('#' + nameDays[index].toLowerCase()).css('display', 'block');
                     generateChart(apps, usage, barChart, pieChart, nameDays[index]);
+                    
+                    $('#' + nameDays[index].toLowerCase() + ' > table').remove();
+                    const table = $('<table>');
+                    const tableHeading = $('<tr>').append($('<th>').text('Applicazione'), $('<th>').text('Ore'));
+                    table.append(tableHeading);
+                    for (let i = 0; i < apps.length; i++) {
+                        const row = $('<tr>').append($('<td>').text(apps[i]), $('<td>').append(usage[i]));
+                        table.append(row);
+                    }
+                    barChart.before(table);
                 });
             });
         });

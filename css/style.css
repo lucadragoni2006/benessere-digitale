@@ -224,7 +224,43 @@
 }
 
 #generated-info-container canvas {
-    width: 50%;
+    width: 40vw;
+}
+
+#generated-info-container > div {
+    margin: 2rem 0;
+    display: none;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    border-collapse: separate;
+}
+
+table * {
+    padding: 0.5rem;
+}
+
+table th {
+    color: white;
+    background-color: #24262b;
+    font-size: 1.5rem;
+}
+
+table tr {
+    border-radius: 3px;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #00246B;
+}
+
+tr:nth-child(odd) {
+    background-color: #CADCFC;
+    color: #001730;
 }
 
 @media only screen and (max-width: 650px) {
@@ -270,5 +306,14 @@
 
     #show {
         width: 75vw;
+    }
+
+    /* Created Chart */
+    #generated-info-container canvas {
+        width: 80vw;
+    }
+
+    table {
+        width: 80vw;
     }
 }
