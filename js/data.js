@@ -18,11 +18,11 @@ export const days = [
     ],
     [
         { name: 'Netflix', usage: '1h 32m' },
-        { name: 'Clash of Clans', usage: '0h 45m' },
+        { name: 'Clash of Clans', usage: '0h 53m' },
         { name: 'Amazon', usage: '0h 14m' },
         { name: 'YouTube', usage: '1h 30m' },
         { name: 'Gmail', usage: '0h 33m' },
-        { name: 'Chrome', usage: '1h 4m' },
+        { name: 'Instagram', usage: '1h 4m' },
         { name: 'TikTok', usage: '0h 53' },
         { name: 'WhatsApp', usage: '1h 37m' },
         { name: 'Chess', usage: '0h 26m' },

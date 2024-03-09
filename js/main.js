@@ -119,9 +119,9 @@ $(document).ready(() => {
                 const pieTotal = $('#pie-total');
                 const everyDayUsage = [];
                 total.forEach((day, index) => {
-                    everyDayUsage[index] = convertTimeStringToNumber(day).toFixed(1);
+                    everyDayUsage[index] = convertTimeStringToNumber(day).toFixed(2);
                 })
-                generateChart(nameDays, everyDayUsage, barTotal, pieTotal, 'Utilizzo Complessivo');
+                generateChart(nameDays, everyDayUsage, barTotal, pieTotal, 'Utilizzo Complessivo Giornaliero');
                 activateSlider();
             });
         });
